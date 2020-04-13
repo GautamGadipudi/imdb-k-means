@@ -25,7 +25,7 @@ def get_docs(g: str) -> list:
         } 
     },
     {
-        'genres': 1, 'kmeansNorm': 1
+        'kmeansNorm': 1
     })
     docs = list(movies_cursor)
     return docs
@@ -109,21 +109,18 @@ def get_new_centroids(g: str) -> list:
         }
     ]))
     
-    new_centroids = []
     for centroid in points_grouped_by_centroid:
         points = centroid['points']
         n = len(points)
         new_centroid_point = [0, 0]
-        new_centroid = {'_id': centroid['_id']}
         for point in points:
             new_centroid_point[0] += point[0]
             new_centroid_point[1] += point[1]
         new_centroid_point[0] /= n
         new_centroid_point[1] /= n
-        new_centroid['point'] = new_centroid_point
-        new_centroids.append(new_centroid)
+        centroid['cluster_point'] = new_centroid_point
 
-    return new_centroids
+    return points_grouped_by_centroid
 
     
 def update_new_centroids(new_centroids: list) -> ():
@@ -133,7 +130,7 @@ def update_new_centroids(new_centroids: list) -> ():
             '_id': centroid['_id']
         }).update({
             '$set': {
-                'point': centroid['point']
+                'point': centroid['cluster_point']
             }
         })
     x = bulk.execute()
