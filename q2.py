@@ -50,7 +50,7 @@ def insert_centroids(points: list):
     for point in points:
         doc = {}
         doc['_id'] = _id
-        doc['kmeansNorm'] = point
+        doc['point'] = point
         docs.append(doc)
         _id += 1
     db.drop_collection('centroids')

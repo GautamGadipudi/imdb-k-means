@@ -68,5 +68,5 @@ db.movies.aggregate([{
     $out: 'moviesToCluster'
 }]);
 
-print('*** Dumped data into collection moviesToCluster collection! ***');
+print('*** Dumped data into moviesToCluster collection! ***');
 
