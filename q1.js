@@ -1,6 +1,7 @@
 db = connect('localhost:27017/imdb');
 
 db.moviesToCluster.drop();
+print('*** Dropped moviesToCluster collection! ***');
 
 db.movies.aggregate([{
     $match: {
