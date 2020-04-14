@@ -14,7 +14,7 @@ GENRES = ['Action', 'Horror', 'Romance', 'Sci-Fi', 'Thriller']
 GENRE_K_DICT = {
     'Action': 25,
     'Romance': 35,
-    'Horror': 15,
-    'Sci-Fi': 15,
-    'Thriller': 25
+    'Horror': 20,
+    'Sci-Fi': 20,
+    'Thriller': 15
 }

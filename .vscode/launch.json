@@ -1,0 +1,101 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [{
+            "name": "Q5",
+            "type": "python",
+            "request": "launch",
+            "program": "q5.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Q5_Action",
+            "type": "python",
+            "request": "launch",
+            "program": "q5.py",
+            "console": "integratedTerminal",
+            "args": [
+                "25", "Action"
+            ]
+        },
+        {
+            "name": "Q5_Romance",
+            "type": "python",
+            "request": "launch",
+            "program": "q5.py",
+            "console": "integratedTerminal",
+            "args": [
+                "35", "Romance"
+            ]
+        },
+        {
+            "name": "Q5_Horror",
+            "type": "python",
+            "request": "launch",
+            "program": "q5.py",
+            "console": "integratedTerminal",
+            "args": [
+                "20", "Horror"
+            ]
+        },
+        {
+            "name": "Q5_Sci-Fi",
+            "type": "python",
+            "request": "launch",
+            "program": "q5.py",
+            "console": "integratedTerminal",
+            "args": [
+                "20", "Sci-Fi"
+            ]
+        },
+        {
+            "name": "Q5_Thriller",
+            "type": "python",
+            "request": "launch",
+            "program": "q5.py",
+            "console": "integratedTerminal",
+            "args": [
+                "15", "Thriller"
+            ]
+        },
+        {
+            "name": "Q4",
+            "type": "python",
+            "request": "launch",
+            "program": "q4.py",
+            "console": "integratedTerminal",
+            "args": [
+                "10", "50", "5", "100"
+            ]
+        },
+        {
+            "name": "Q3",
+            "type": "python",
+            "request": "launch",
+            "program": "q3.py",
+            "console": "integratedTerminal",
+            "args": [
+                "Action"
+            ]
+        },
+        {
+            "name": "Q2",
+            "type": "python",
+            "request": "launch",
+            "program": "q2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "25", "Action"
+            ]
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}

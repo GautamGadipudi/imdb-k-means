@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plot
 from pymongo import MongoClient
+import numpy as np
 
 from sys import argv
 import random
@@ -15,7 +16,7 @@ def get_clusters(g: str) -> list:
     return list(db.get_collection(CLUSTER_COLLECTION_NAME).aggregate([
     {
         '$match': {
-            'genres': 'Action'
+            'genres': g
         }
     }, {
         '$group': {
@@ -24,8 +25,7 @@ def get_clusters(g: str) -> list:
                 '$push': '$kmeansNorm'
             }
         }
-    }
-    ]))
+    }]))
 
 
 def get_random_color(palette=[]):   
@@ -41,15 +41,18 @@ def get_random_color(palette=[]):
     return result
 
 def plot_points(clusters: list, g: str):
-    cluster_colors = []
-    for cluster in clusters:
-        cluster_color = get_random_color(cluster_colors)
-        cluster_colors.append(cluster_color)
-        for point in cluster['points']:
-            plot.plot(point[0], point[1], cluster_color)
     plot.title(g)
     plot.xlabel('Normalized startYear')
     plot.ylabel('Normalized avgRating')
+    plot.xticks(np.arange(0, 1.2, 0.1))
+    plot.yticks(np.arange(0, 1.2, 0.1))
+    for cluster in clusters:
+        cluster_colors = []
+        cluster_color = get_random_color(cluster_colors)
+        cluster_colors.append(cluster_color)
+        for point in cluster['points']:
+            plot.plot(point[0], point[1], cluster_color, markersize=5)
+    
     plot.savefig(f'./img/q5/{g}.jpg', format='jpg')
     plot.clf()
 

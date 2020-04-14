@@ -55,7 +55,7 @@ def plot_graph(genre: str, k_SSE_dic: dict):
     plot.plot(k_list, SSE_list)
     plot.xlabel('k value')
     plot.ylabel('Sum of squared error')
-    plot.savefig(f'{genre}.jpg', format='jpeg')
+    plot.savefig(f'img/q4/{genre}.jpg', format='jpeg')
     plot.clf()
 
 
