@@ -60,10 +60,15 @@ def insert_centroids(points: list):
     return x.acknowledged, len(x.inserted_ids)
 
 
-if __name__ == "__main__":
-    k, g = get_k_g()
+def main(k=None, g=None):
+    if k is None and g is None:
+        k, g = get_k_g()
     points = get_sample(k, g)
     isInserted, count = insert_centroids(points)
     if isInserted:
         print(f"Inserted {count} docs into {CENTROIDS_COLLECTION_NAME} collection.")
+
+
+if __name__ == "__main__":
+    main()
     client.close()

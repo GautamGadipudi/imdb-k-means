@@ -5,7 +5,7 @@ from sys import argv
 from scipy.spatial import distance
 from pymongo import MongoClient
 
-from constants import CONNECTION_STRING, DATABASE_NAME, CLUSTER_COLLECTION_NAME, CENTROIDS_COLLECTION_NAME
+from constants import CONNECTION_STRING, DATABASE_NAME, CLUSTER_COLLECTION_NAME, CENTROIDS_COLLECTION_NAME, DEFAULT_ITERATION_LIMIT
 
 client = MongoClient(CONNECTION_STRING)
 db = client.get_database(DATABASE_NAME)
@@ -138,13 +138,26 @@ def update_new_centroids(new_centroids: list) -> ():
     x = bulk.execute()
     return x['nMatched'], x['nModified']
 
-if __name__ == "__main__":
-    g = get_g()
+
+def iterate(docs, g, iteration_limit=DEFAULT_ITERATION_LIMIT):
+    for i in range(iteration_limit):
+        print(f'********** genre = {g} iteration = {i + 1} ************')
+        updated_docs = assign_cluster_centers(docs)
+        match_count, update_count = update_cluster_centers(updated_docs)
+        print(f'Updated {update_count} / {match_count} docs with new cluster.')
+        new_centroids = get_new_centroids(g)
+        match_count, update_count = update_new_centroids(new_centroids)
+        print(f'Updated {update_count} / {match_count} docs with new centroid.')
+        if update_count == 0:
+            break
+
+
+def main(g=None):
+    if g is None:
+        g = get_g()
     docs = get_docs(g)
-    updated_docs = assign_cluster_centers(docs)
-    match_count, update_count = update_cluster_centers(updated_docs)
-    print(f'Updated {update_count} / {match_count} docs with new cluster.')
-    new_centroids = get_new_centroids(g)
-    match_count, update_count = update_new_centroids(new_centroids)
-    print(f'Updated {update_count} / {match_count} docs with new centroid.')
-    
+    iterate(docs, g)
+
+if __name__ == "__main__":
+    main()
+    client.close()

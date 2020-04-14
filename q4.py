@@ -53,11 +53,13 @@ def plot_graph(genre: str, k_SSE_dic: dict):
         k_list.append(k)
         SSE_list.append(k_SSE_dic[k])
     plot.plot(k_list, SSE_list)
-    plot.savefig(f'{genre}_graph.jpg', format='jpeg')
+    plot.xlabel('k value')
+    plot.ylabel('Sum of squared error')
+    plot.savefig(f'{genre}.jpg', format='jpeg')
     plot.clf()
 
 
-if __name__ == "__main__":
+def main():
     k_min, k_max, k_step, iter_limit = get_command_line_args()
     for g in GENRES:
         print(f'******** Calculating for {g} ***********')
@@ -86,3 +88,7 @@ if __name__ == "__main__":
         plot_graph(g, k_SSE_dic)
     client1.close()
     client2.close()
+
+if __name__ == "__main__":
+    main()
+    

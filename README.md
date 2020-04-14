@@ -24,6 +24,7 @@ In the root of the repo, run the following:
 ```bash
 python3 q4.py 10 50 5 100
 ```
+You can see the graphs in `./img/q4` directory.
 
 > **Action**: 
 >
@@ -44,3 +45,28 @@ python3 q4.py 10 50 5 100
 > **Thriller**: 
 >
 > ![Thriller genre graph](Thriller_graph.jpg)
+
+## Question 4
+In the root of the repo, run the following:
+```bash
+python3 q5.py
+```
+> **Action Clusters**: 
+>
+> ![Action genre clusters](img/q5/Action.jpg)
+
+> **Romance Clusters**: 
+>
+> ![Romance genre clusters](img/q5/Romance.jpg)
+
+> **Horror Clusters**: 
+>
+> ![Horror genre clusters](img/q5/Horror.jpg)
+
+> **Sci-Fi Clusters**: 
+>
+> ![Sci-Fi genre clusters](img/q5/Sci-Fi.jpg)
+
+> **Thriller Clusters**: 
+>
+> ![Thriller genre clusters](img/q5/Thriller.jpg)
