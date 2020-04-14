@@ -1,8 +1,10 @@
 from pymongo import MongoClient
 from sys import argv
 
-client = MongoClient('mongodb://localhost:27017/')
-db = client.imdb
+from constants import CONNECTION_STRING, DATABASE_NAME, CLUSTER_COLLECTION_NAME, CENTROIDS_COLLECTION_NAME
+
+client = MongoClient(CONNECTION_STRING)
+db = client.get_database(DATABASE_NAME)
 
 
 def get_k_g() -> (int, str):
@@ -23,7 +25,7 @@ def get_k_g() -> (int, str):
 def get_sample(k: int, g: str) -> list:
     result = []
     
-    data = db.get_collection('moviesToCluster').aggregate([
+    data = db.get_collection(CLUSTER_COLLECTION_NAME).aggregate([
         {
             '$match': {
                 'genres': g
@@ -53,8 +55,8 @@ def insert_centroids(points: list):
         doc['point'] = point
         docs.append(doc)
         _id += 1
-    db.drop_collection('centroids')
-    x = db.get_collection('centroids').insert_many(docs)
+    db.drop_collection(CENTROIDS_COLLECTION_NAME)
+    x = db.get_collection(CENTROIDS_COLLECTION_NAME).insert_many(docs)
     return x.acknowledged, len(x.inserted_ids)
 
 
@@ -63,5 +65,5 @@ if __name__ == "__main__":
     points = get_sample(k, g)
     isInserted, count = insert_centroids(points)
     if isInserted:
-        print(f"Inserted {count} docs into centroids collection.")
+        print(f"Inserted {count} docs into {CENTROIDS_COLLECTION_NAME} collection.")
     client.close()

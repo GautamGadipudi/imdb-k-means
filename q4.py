@@ -1,6 +1,7 @@
 from sys import argv
 from q2 import get_sample, insert_centroids, client as client1
 from q3 import get_docs, assign_cluster_centers, update_cluster_centers, get_new_centroids, update_new_centroids, client as client2
+from constants import GENRES, CENTROIDS_COLLECTION_NAME
 
 import matplotlib.pyplot as plot
 
@@ -57,9 +58,8 @@ def plot_graph(genre: str, k_SSE_dic: dict):
 
 
 if __name__ == "__main__":
-    genres = ['Action', 'Horror', 'Romance', 'Sci-Fi', 'Thriller']
     k_min, k_max, k_step, iter_limit = get_command_line_args()
-    for g in genres:
+    for g in GENRES:
         print(f'******** Calculating for {g} ***********')
         docs = get_docs(g)
         k_SSE_dic = {}
@@ -68,7 +68,7 @@ if __name__ == "__main__":
             isInserted, count = insert_centroids(points)
             clusters = []
             if isInserted:
-                    print(f"Inserted {count} random docs into centroids collection.")
+                    print(f"Inserted {count} random docs into {CENTROIDS_COLLECTION_NAME} collection.")
             for i in range(iter_limit):
                 print(f'********** genre = {g} k = {k} iteration = {i + 1} ************')
                 

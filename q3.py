@@ -5,8 +5,10 @@ from sys import argv
 from scipy.spatial import distance
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://localhost:27017/')
-db = client.imdb
+from constants import CONNECTION_STRING, DATABASE_NAME, CLUSTER_COLLECTION_NAME, CENTROIDS_COLLECTION_NAME
+
+client = MongoClient(CONNECTION_STRING)
+db = client.get_database(DATABASE_NAME)
 
 
 def get_g() -> str:
@@ -19,7 +21,7 @@ def get_g() -> str:
 
 
 def get_docs(g: str) -> list:
-    movies_cursor = db.get_collection('moviesToCluster').find({
+    movies_cursor = db.get_collection(CLUSTER_COLLECTION_NAME).find({
         'genres': {
             '$eq': g
         } 
@@ -32,7 +34,7 @@ def get_docs(g: str) -> list:
 
 
 def get_centroids() -> list:
-    centroids_cursor = db.get_collection('centroids').find({})
+    centroids_cursor = db.get_collection(CENTROIDS_COLLECTION_NAME).find({})
     return list(doc['point'] for doc in centroids_cursor)
 
 
@@ -52,7 +54,7 @@ def assign_cluster_centers(docs: list) -> list:
 
 
 def update_cluster_centers(docs: list) -> (int, int):
-    bulk = db.get_collection('moviesToCluster').initialize_unordered_bulk_op(True)
+    bulk = db.get_collection(CLUSTER_COLLECTION_NAME).initialize_unordered_bulk_op(True)
     for doc in docs:
         bulk.find({
                 '_id': doc['_id']
@@ -66,7 +68,7 @@ def update_cluster_centers(docs: list) -> (int, int):
 
 
 def get_new_centroids(g: str) -> list:
-    points_grouped_by_centroid = list(db.get_collection('moviesToCluster').aggregate([
+    points_grouped_by_centroid = list(db.get_collection(CLUSTER_COLLECTION_NAME).aggregate([
         {
             '$match': {
                 'genres': g
@@ -124,7 +126,7 @@ def get_new_centroids(g: str) -> list:
 
     
 def update_new_centroids(new_centroids: list) -> ():
-    bulk = db.get_collection('centroids').initialize_unordered_bulk_op(True)
+    bulk = db.get_collection(CENTROIDS_COLLECTION_NAME).initialize_unordered_bulk_op(True)
     for centroid in new_centroids:
         bulk.find({
             '_id': centroid['_id']
