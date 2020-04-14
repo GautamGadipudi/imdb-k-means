@@ -19,3 +19,28 @@ In the root of the repo, run the following:
 python3 q3.py {genre-name}
 ```
 
+## Question 4
+In the root of the repo, run the following:
+```bash
+python3 q4.py 10 50 5 100
+```
+
+> **Action**: 
+>
+> ![Action genre graph](Action_graph.jpg)
+
+> **Romance**: 
+>
+> ![Romance genre graph](Romance_graph.jpg)
+
+> **Horror**: 
+>
+> ![Horror genre graph](Horror_graph.jpg)
+
+> **Sci-Fi**: 
+>
+> ![Sci-Fi genre graph](Sci-Fi_graph.jpg)
+
+> **Thriller**: 
+>
+> ![Thriller genre graph](Thriller_graph.jpg)
