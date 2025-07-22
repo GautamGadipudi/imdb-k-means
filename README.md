@@ -1,25 +1,8 @@
-# bd-assignment-8
-Assignment 8 – Clustering
+# Clustering movies from IMDB dataset
 
-## Question 1
-In the root of the repo, run the following:
-```bash
-mongo q1.js
-```
+## Finding the best k (cluster size) for each genre
+We follow the [elbow-method](https://www.geeksforgeeks.org/machine-learning/elbow-method-for-optimal-value-of-k-in-kmeans/) to find an optimal cluster size for each genre.
 
-## Question 2
-In the root of the repo, run the following:
-```bash
-python3 q2.py {k-value} {genre-name}
-```
-
-## Question 3
-In the root of the repo, run the following:
-```bash
-python3 q3.py {genre-name}
-```
-
-## Question 4
 In the root of the repo, run the following:
 ```bash
 python3 q4.py 10 50 5 100
@@ -56,7 +39,7 @@ You can see the graphs in `./img/q4` directory. Below are the graphs of one part
 >
 > 15
 
-## Question 4
+## Resulting clusters for subset of the dataset
 In the root of the repo, run the following:
 ```bash
 python3 q5.py
@@ -91,4 +74,23 @@ You can see the graphs in `./img/q5` directory. Below are the graphs of one part
 > ![Sci-Fi genre clusters](img/static/q5/Sci-Fi.jpg)
 >
 > Consider the cluster of black stars (<span style="color:black">★</span>). It shows the moderately rated Sci-Fi movies released between the years 1976 and 1996.
+
+
+## Question 1
+In the root of the repo, run the following:
+```bash
+mongo q1.js
+```
+
+## Question 2
+In the root of the repo, run the following:
+```bash
+python3 q2.py {k-value} {genre-name}
+```
+
+## Question 3
+In the root of the repo, run the following:
+```bash
+python3 q3.py {genre-name}
+```
 
